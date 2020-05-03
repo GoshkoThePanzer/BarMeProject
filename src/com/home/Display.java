@@ -18,16 +18,18 @@ public class Display {
         frame.setLocationRelativeTo(null);
         frame.setTitle(name);
         frame.setResizable(false);
+        //frame.setLayout(new BorderLayout());
         frame.setVisible(true);
 
     }
 
     public void addPage(Page page) {
-        //frame.getContentPane().removeAll();
-        for (int i = 0; i < page.getComponents().length; i++) {
-            frame.add(page.getComponent(i));
-            System.out.println(2);
+        frame.getContentPane().removeAll();
+        for (int i = 0; i < page.getComponentsNumber(); i++) {
+            frame.getContentPane().add(page.getSpecificComponent(i));
+            frame.setVisible(true);
         }
+
     }
     public void changePage(Page page) {
         frame.getContentPane().getComponents();
