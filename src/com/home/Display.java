@@ -18,7 +18,6 @@ public class Display {
         frame.setLocationRelativeTo(null);
         frame.setTitle(name);
         frame.setResizable(false);
-        //frame.setLayout(new BorderLayout());
         frame.setVisible(true);
 
     }

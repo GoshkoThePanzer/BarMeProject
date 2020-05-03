@@ -28,8 +28,9 @@ public class Page {
 
     }
 
-    public void addButton(int x, int y, int width, int height, String name) {
+    public void addButton(int x, int y, int width, int height, String name, Thread tread) {
         JButton btn = new JButton(name);
+        btn.addActionListener(e -> tread.start());
         btn.setBounds(x, y, width, height);
         JPanel panel = new JPanel();
         panel.setLayout(null);
