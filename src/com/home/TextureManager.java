@@ -28,4 +28,10 @@ public class TextureManager extends JComponent {
 
         graph.drawImage(image, this.x, this.y, this.width, this.height, null);
     }
+
+    public void render() {
+        Thread animationThread = new Thread(this::repaint);
+
+        animationThread.start();
+    }
 }
