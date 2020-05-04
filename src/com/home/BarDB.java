@@ -30,7 +30,7 @@ public class BarDB {
 
     public Bar getBarByIndex (int index){
         if (index < 0) {
-            throw new IllegalArgumentException("Can't enter negative index.")
+            throw new IllegalArgumentException("Can't enter negative index.");
         }
         if (index >= size){
             throw new IndexOutOfBoundsException("Size: " + size + "Index: " + index);
