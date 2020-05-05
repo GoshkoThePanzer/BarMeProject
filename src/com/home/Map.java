@@ -3,7 +3,7 @@ package com.home;
 public class Map {
 
     BarDB barDataBase;
-    Display display;
+    public static Display display;
 
     Map() {
         barDataBase = new BarDB();

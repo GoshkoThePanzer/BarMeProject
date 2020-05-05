@@ -26,6 +26,11 @@ public class Display {
         frame.add(texture).setVisible(true);
 
     }
+
+
+    public void addComponent(JComponent component) {
+        frame.add(component);
+    }
     public void changePage(Page page) {
         frame.getContentPane().getComponents();
     }
