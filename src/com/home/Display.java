@@ -5,16 +5,16 @@ import java.awt.*;
 
 public class Display {
 
-    JFrame frame = new JFrame();
-    static int width;
-    static int height;
+    private JFrame frame = new JFrame();
+    private static int width;
+    private static int height;
 
     Display(int widthSize, int heightSize, String name) {
         width = widthSize;
         height = heightSize;
 
         frame.setSize(widthSize, heightSize);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setTitle(name);
         frame.setResizable(false);
@@ -23,8 +23,17 @@ public class Display {
     }
 
     public void addTexture(TextureManager texture) {
-        frame.add(texture).setVisible(true);
+        frame.add(texture).repaint();
+        frame.setVisible(true);
+    }
 
+
+    public JFrame getFrame() {
+        return frame;
+    }
+
+    public void addComponent(JComponent component) {
+        frame.getContentPane().add(component);
     }
     public void changePage(Page page) {
         frame.getContentPane().getComponents();
