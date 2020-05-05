@@ -27,6 +27,9 @@ public class Display {
 
     }
 
+    public JFrame getFrame() {
+        return frame;
+    }
 
     public void addComponent(JComponent component) {
         frame.add(component);

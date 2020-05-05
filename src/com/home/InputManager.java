@@ -3,6 +3,7 @@ package com.home;
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import java.awt.*;
 
 public class InputManager extends JPanel implements ChangeListener {
 
@@ -26,5 +27,15 @@ public class InputManager extends JPanel implements ChangeListener {
             pressed = model.isPressed();
             if (!pressed) isMouseRealised = true;
         }
+    }
+
+    public void listener() {
+        int x = (int) MouseInfo.getPointerInfo().getLocation().getX() - Map.display.getFrame().getLocation().x - 8;
+        int y = (int) MouseInfo.getPointerInfo().getLocation().getY() - Map.display.getFrame().getLocation().y - 30;
+        int xIndex = x / ((Display.getWidth()) / 8);
+        int yIndex = y / ((Display.getHeight()) / 8);
+
+        if (pressed)
+        else if (isMouseRealised)
     }
 }
