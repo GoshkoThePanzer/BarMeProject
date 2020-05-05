@@ -5,8 +5,8 @@ import java.awt.*;
 
 public class TextureManager extends JComponent {
 
-    int x;
-    int y;
+    private int x;
+    private int y;
     int width;
     int height;
     static int scale;

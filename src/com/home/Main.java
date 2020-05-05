@@ -7,8 +7,9 @@ public class Main {
 
     public static void main(String[] args) {
         // write your code here
-        Scanner input = new Scanner(System.in);
         while (true) {
+            System.out.println("Enter option: " + '\n' + "1: open all bars" + '\n'+ "2: open opened bars" + '\n' + "3: show map of bars");
+            Scanner input = new Scanner(System.in);
             int option = input.nextInt();
             switch (option) {
                 case 1:
@@ -21,6 +22,7 @@ public class Main {
                     option3();
                     break;
                 default:
+                    System.out.println("invalid option");
                     break;
             }
         }
@@ -43,6 +45,7 @@ public class Main {
         Map map = new Map();
         while (true) {
             map.update();
+
         }
     }
 }

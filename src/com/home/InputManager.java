@@ -4,11 +4,9 @@ import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
-import java.awt.event.MouseWheelEvent;
-import java.awt.event.MouseWheelListener;
 
 
-public class InputManager extends JPanel implements ChangeListener, MouseWheelListener {
+public class InputManager extends JPanel implements ChangeListener {
 
     private boolean pressed = false;
     private boolean isMouseRealised = false;
@@ -23,6 +21,7 @@ public class InputManager extends JPanel implements ChangeListener, MouseWheelLi
         button.setBorderPainted(false);
         button.setBounds(0, 0, Display.getWidth(), Display.getHeight());
         Map.display.addComponent(button);
+
     }
 
     @Override
@@ -49,15 +48,14 @@ public class InputManager extends JPanel implements ChangeListener, MouseWheelLi
             mouseReleasedY = y;
         }
 
-
         Map.textureMap.setX(Map.textureMap.getX() + (x - mouseReleasedX));
         Map.textureMap.setY(Map.textureMap.getY() + (y - mouseReleasedY));
+        Map.textureMap.render();
         for (int i = 0; i < Map.barDataBase.getBarArray().length; i++) {
             Map.barDataBase.getBarArray()[i].getTexture().setX(Map.barDataBase.getBarArray()[i].getMapX() + (x - mouseReleasedX));
             Map.barDataBase.getBarArray()[i].getTexture().setY(Map.barDataBase.getBarArray()[i].getMapY() + (y - mouseReleasedY));
             Map.barDataBase.getBarArray()[i].getTexture().render();
         }
-        Map.textureMap.render();
     }
 
     private void mouseRealised(int x, int y) {
@@ -66,17 +64,4 @@ public class InputManager extends JPanel implements ChangeListener, MouseWheelLi
         isMouseRealised = false;
     }
 
-    @Override
-    public void mouseWheelMoved(MouseWheelEvent e) {
-        if (e.isControlDown()) {
-            if (e.getWheelRotation() < 0) {
-                System.out.println("mouse wheel Up");
-            } else {
-                System.out.println("mouse wheel Down");
-            }
-        } else {
-            getParent().dispatchEvent(e);
-        }
-
-    }
 }

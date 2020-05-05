@@ -14,7 +14,7 @@ public class Display {
         height = heightSize;
 
         frame.setSize(widthSize, heightSize);
-        frame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setTitle(name);
         frame.setResizable(false);
@@ -33,7 +33,7 @@ public class Display {
     }
 
     public void addComponent(JComponent component) {
-        frame.add(component);
+        frame.getContentPane().add(component);
     }
     public void changePage(Page page) {
         frame.getContentPane().getComponents();
