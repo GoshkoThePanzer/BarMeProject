@@ -38,7 +38,7 @@ public class BarDB {
             i++;
         }
         if (size - 1 - i >= 0) System.arraycopy(barArray, i + 1, barArray, i, size - 1 - i);
-        size--;
+        size = size - 1;
     }
 
     public String toString() {
