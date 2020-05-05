@@ -48,16 +48,19 @@ public class InputManager extends JPanel implements ChangeListener, MouseWheelLi
             mouseReleasedX = x;
             mouseReleasedY = y;
         }
-/*
+
 
         Map.textureMap.setX(Map.textureMap.getX() + (x - mouseReleasedX));
         Map.textureMap.setY(Map.textureMap.getY() + (y - mouseReleasedY));
+        for (int i = 0; i < Map.barDataBase.getBarArray().length; i++) {
+            Map.barDataBase.getBarArray()[i].getTexture().setX(Map.barDataBase.getBarArray()[i].getMapX() + (x - mouseReleasedX));
+            Map.barDataBase.getBarArray()[i].getTexture().setY(Map.barDataBase.getBarArray()[i].getMapY() + (y - mouseReleasedY));
+            Map.barDataBase.getBarArray()[i].getTexture().render();
+        }
         Map.textureMap.render();
-        System.out.println("x: " + x + " y: " + y);*/
     }
 
     private void mouseRealised(int x, int y) {
-        System.out.println("x: " + x + " y: " + y);
         mouseReleasedX = x;
         mouseReleasedY = y;
         isMouseRealised = false;

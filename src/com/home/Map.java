@@ -2,7 +2,7 @@ package com.home;
 
 public class Map {
 
-    public BarDB barDataBase;
+    public static BarDB barDataBase;
     public static Display display;
     private InputManager input;
     public static double MAP_START_X_CONST = 43.226279;
@@ -33,7 +33,7 @@ public class Map {
         Bar[] barArray = barDataBase.getBarArray();
         for (int i = 0; i < barArray.length; i++) {
             System.out.println((i + 1) + " " + barArray[i].getName() + " " + barArray[i].getMapX() + " " + barArray[i].getMapY());
-            if(i < 9) barDataBase.getBarArray()[i].setTexture(30, 30, 1, "assets\\" + (i + 1) + "-Number-PNG.png");
+            if(i < 9) barDataBase.getBarArray()[i].setTexture(23, 23, 1, "assets\\" + (i + 1) + "-Number-PNG.png");
             //display.getFrame().getComponent(i + 1).;
         }
     }

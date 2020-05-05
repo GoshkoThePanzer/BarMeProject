@@ -48,6 +48,7 @@ public class Bar {
         return pixelY;
     }
 
+
     public void setDistance(double distance) {
         this.distance = distance;
     }
