@@ -5,9 +5,9 @@ import java.awt.*;
 
 public class Display {
 
-    JFrame frame = new JFrame();
-    static int width;
-    static int height;
+    private JFrame frame = new JFrame();
+    private static int width;
+    private static int height;
 
     Display(int widthSize, int heightSize, String name) {
         width = widthSize;

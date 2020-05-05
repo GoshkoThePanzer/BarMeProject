@@ -31,6 +31,6 @@ public class Main {
     }
 
     public static void option3() {
-
+        Map map = new Map();
     }
 }
