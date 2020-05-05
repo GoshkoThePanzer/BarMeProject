@@ -12,13 +12,15 @@ public class TextureManager extends JComponent {
     static int scale;
     String path;
 
-    public TextureManager(int x, int y, int width, int height, String path) {
+    public TextureManager() {}
+
+    public TextureManager(int x, int y, int width, int height, int scale, String path) {
         this.x = x;
         this.y = y;
-        this.width = width;
-        this.height = height;
+        this.width = width * scale;
+        this.height = height * scale;
         this.path = path;
-        scale = 0;
+        scale = 1;
     }
 
     public TextureManager(int x, int y, String path) {
@@ -59,5 +61,14 @@ public class TextureManager extends JComponent {
         Thread animationThread = new Thread(this::repaint);
 
         animationThread.start();
+    }
+
+    public void setX(int x) {
+        this.x = x;
+    }
+
+
+    public void setY(int y) {
+        this.y = y;
     }
 }

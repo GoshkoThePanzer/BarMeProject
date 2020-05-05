@@ -14,7 +14,7 @@ public class Display {
         height = heightSize;
 
         frame.setSize(widthSize, heightSize);
-        //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setTitle(name);
         frame.setResizable(false);
@@ -23,9 +23,10 @@ public class Display {
     }
 
     public void addTexture(TextureManager texture) {
-        frame.add(texture).setVisible(true);
-
+        frame.add(texture).repaint();
+        frame.setVisible(true);
     }
+
 
     public JFrame getFrame() {
         return frame;

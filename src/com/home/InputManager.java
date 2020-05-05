@@ -4,8 +4,11 @@ import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
+import java.awt.event.MouseWheelEvent;
+import java.awt.event.MouseWheelListener;
 
-public class InputManager extends JPanel implements ChangeListener {
+
+public class InputManager extends JPanel implements ChangeListener, MouseWheelListener {
 
     private boolean pressed = false;
     private boolean isMouseRealised = false;
@@ -41,17 +44,36 @@ public class InputManager extends JPanel implements ChangeListener {
 
     private void mousePressed(int x, int y) {
 
-        if(mouseReleasedX == 0 && mouseReleasedY == 0) {
+        if (mouseReleasedX == 0 && mouseReleasedY == 0) {
             mouseReleasedX = x;
             mouseReleasedY = y;
         }
+/*
 
-        System.out.println("x: " + x + " y: " + y);
+        Map.textureMap.setX(Map.textureMap.getX() + (x - mouseReleasedX));
+        Map.textureMap.setY(Map.textureMap.getY() + (y - mouseReleasedY));
+        Map.textureMap.render();
+        System.out.println("x: " + x + " y: " + y);*/
     }
 
     private void mouseRealised(int x, int y) {
+        System.out.println("x: " + x + " y: " + y);
         mouseReleasedX = x;
         mouseReleasedY = y;
         isMouseRealised = false;
+    }
+
+    @Override
+    public void mouseWheelMoved(MouseWheelEvent e) {
+        if (e.isControlDown()) {
+            if (e.getWheelRotation() < 0) {
+                System.out.println("mouse wheel Up");
+            } else {
+                System.out.println("mouse wheel Down");
+            }
+        } else {
+            getParent().dispatchEvent(e);
+        }
+
     }
 }

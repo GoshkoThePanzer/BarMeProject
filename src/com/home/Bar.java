@@ -9,27 +9,43 @@ public class Bar {
     private LocalTime openingTime;
     private LocalTime closingTime;
     private double distance;
+    private TextureManager texture;
+    private int pixelX;
+    private int pixelY;
 
     public Bar() {
     }
 
-    public Bar(String name, double locationNAxis, double locationEAxis, LocalTime openingTime, LocalTime closingTime) {
+    public Bar(String name, double locationNAxis, double locationEAxis, LocalTime openingTime, LocalTime closingTime, int pixelX, int pixelY) {
         this.name = name;
         this.locationNAxis = locationNAxis;
         this.locationEAxis = locationEAxis;
         this.openingTime = openingTime;
         this.closingTime = closingTime;
+        texture = new TextureManager();
+        this.pixelX = pixelX;
+        this.pixelY = pixelY;
     }
 
     public double getDistance() {
         return distance;
     }
 
-    public int getMapX() {
-        return (int) Math.abs(((locationNAxis - Map.MAP_START_X_CONST) * 600) / Map.MAP_CONST);
+    public void setTexture(int width, int height, int scale, String path) {
+        texture = new TextureManager(getMapX(), getMapY(), width, height, scale, path);
+        Map.display.addTexture(texture);
     }
+
+    public TextureManager getTexture() {
+        return texture;
+    }
+
+    public int getMapX() {
+        return pixelX;
+    }
+
     public int getMapY() {
-        return (int) Math.abs(((locationEAxis - Map.MAP_START_Y_CONST) * 600) / Map.MAP_CONST);
+        return pixelY;
     }
 
     public void setDistance(double distance) {
