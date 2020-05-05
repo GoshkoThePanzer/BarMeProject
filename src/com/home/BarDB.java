@@ -8,7 +8,11 @@ public class BarDB {
 
     private Bar[] barArray;
     private int size;
-    private Rearranger rearranger;
+    private Rearranger rearranger = new Rearranger();
+
+    public Bar[] getBarArray() {
+        return barArray;
+    }
 
     public BarDB() {
         barArray = new Bar[DEFAULT_INITIAL_SIZE];
@@ -24,38 +28,36 @@ public class BarDB {
 
     public void expandArray() {
         Bar[] newArray = new Bar[barArray.length * 2];
-        for (int i = 0; i < barArray.length; i++) {
-            newArray[i] = barArray[i];
-        }
+        System.arraycopy(barArray, 0, newArray, 0, barArray.length);
         barArray = newArray;
     }
 
-    public Bar getBarByIndex(int index) {
-        if (index < 0) {
-            throw new IllegalArgumentException("Can't enter negative index.");
+    public void remove(Bar removedBar) {
+        int i = 0;
+        while (!barArray[i].equals(removedBar)) {
+            i++;
         }
-        if (index >= size) {
-            throw new IndexOutOfBoundsException("Size: " + size + "Index: " + index);
-        }
-        return barArray[index];
+        if (size - 1 - i >= 0) System.arraycopy(barArray, i + 1, barArray, i, size - 1 - i);
+        size--;
     }
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        rearranger.rearrangeArraybyDiff(size, barArray);
+        rearranger.rearrangeArrayByDiff(size, barArray);
         for (int i = 0; i < size; i++) {
-            sb.append((i + 1) + ". " + barArray[i].getName() + " (" + barArray[i].getOpeningTime()
-                    + "-" + barArray[i].getClosingTime() + ")" + " distance: " + barArray[i].getDistance() + "m" + "\n");
+            sb.append(i + 1).append(". ").append(barArray[i].getName()).append(" (").append(barArray[i].getOpeningTime())
+                    .append("-").append(barArray[i].getClosingTime()).append(")").append(" distance: ")
+                    .append(barArray[i].getDistance()).append("m").append("\n");
         }
         return sb.toString();
     }
 
     public String toString(LocalTime time) {
         StringBuilder sb = new StringBuilder();
-        rearranger.rearrangeArraybyTime(time, size, barArray);
+        rearranger.rearrangeArrayByTime(time, size, this);
         for (int i = 0; i < size; i++) {
-            sb.append((i + 1) + ". " + barArray[i].getName() + " (" + barArray[i].getOpeningTime()
-                    + "-" + barArray[i].getClosingTime() + ")" + "\n");
+            sb.append(i + 1).append(". ").append(barArray[i].getName()).append(" (").append(barArray[i].getOpeningTime())
+                    .append("-").append(barArray[i].getClosingTime()).append(")").append("\n");
         }
         return sb.toString();
     }

@@ -1,9 +1,10 @@
 package com.home;
 
 import java.time.LocalTime;
+import java.util.Arrays;
 
 public class Rearranger {
-    public void rearrangeArraybyDiff(int size, Bar[] barArray) {
+    public void rearrangeArrayByDiff(int size, Bar[] barArray) {
         double[] diffArray = new double[size];
         for (int i = 0; i < size; i++) {
             barArray[i].setDistance(Setup.findDistanceInMetresBetweenTwoCoordinates(barArray[i].getLocationNAxis(), barArray[i].getLocationEAxis()));
@@ -32,16 +33,27 @@ public class Rearranger {
                 }
     }
 
-    public void rearrangeArraybyTime(LocalTime time, int size, Bar[] barArray){
+    public void rearrangeArrayByTime(LocalTime time, int size, BarDB barDB) {
+        //future development - it's not ready!
+        Bar[] barArray = barDB.getBarArray();
         double[] timeArray = new double[size];
+        System.out.println(size);
         for (int i = 0; i < size; i++) {
-            barArray[i].setDistance(Setup.findDistanceInMetresBetweenTwoCoordinates(barArray[i].getLocationNAxis(), barArray[i].getLocationEAxis()));
-            timeArray[i] = barArray[i].getDistance();
+            if (time.isAfter(barArray[i].getClosingTime()) || time.isBefore(barArray[i].getOpeningTime())) {
+                barDB.remove(barArray[i]);
+                size--;
+            }
         }
+        System.out.println(size);
+        for (int i = 0; i < size; i++) {
+            timeArray[i] = barArray[i].getClosingTime().getHour()*60 - time.getHour()*60 + barArray[i].getClosingTime().getMinute() - time.getMinute();
+        }
+        System.out.println(Arrays.toString(timeArray));
         bubbleSort(timeArray);
+        System.out.println(Arrays.toString(timeArray));
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
-                if (timeArray[i] == barArray[j].getDistance()) {
+                if (timeArray[i] == barArray[i].getClosingTime().getHour()*60 - time.getHour()*60 + barArray[i].getClosingTime().getMinute() - time.getMinute()) {
                     Bar temp = barArray[i];
                     barArray[i] = barArray[j];
                     barArray[j] = temp;

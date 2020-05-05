@@ -13,7 +13,7 @@ public class Main {
     public static void option1() {
         BarDB barDatabase = new BarDB();
         new Setup().setupBar(barDatabase);
-        System.out.println(barDatabase);
+        System.out.println(barDatabase.toString());
     }
 
     public static void option2() {
