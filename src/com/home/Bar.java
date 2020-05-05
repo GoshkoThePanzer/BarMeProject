@@ -9,21 +9,45 @@ public class Bar {
     private LocalTime openingTime;
     private LocalTime closingTime;
     private double distance;
+    private TextureManager texture;
+    private int pixelX;
+    private int pixelY;
 
     public Bar() {
     }
 
-    public Bar(String name, double locationNAxis, double locationEAxis, LocalTime openingTime, LocalTime closingTime) {
+    public Bar(String name, double locationNAxis, double locationEAxis, LocalTime openingTime, LocalTime closingTime, int pixelX, int pixelY) {
         this.name = name;
         this.locationNAxis = locationNAxis;
         this.locationEAxis = locationEAxis;
         this.openingTime = openingTime;
         this.closingTime = closingTime;
+        texture = new TextureManager();
+        this.pixelX = pixelX;
+        this.pixelY = pixelY;
     }
 
     public double getDistance() {
         return distance;
     }
+
+    public void setTexture(int width, int height, int scale, String path) {
+        texture = new TextureManager(getMapX(), getMapY(), width, height, scale, path);
+        Map.display.addTexture(texture);
+    }
+
+    public TextureManager getTexture() {
+        return texture;
+    }
+
+    public int getMapX() {
+        return pixelX;
+    }
+
+    public int getMapY() {
+        return pixelY;
+    }
+
 
     public void setDistance(double distance) {
         this.distance = distance;
