@@ -1,11 +1,14 @@
 package com.home;
 
+import java.time.LocalTime;
+
 public class BarDB {
 
     private static final int DEFAULT_INITIAL_SIZE = 10;
 
     private Bar[] barArray;
     private int size;
+    private Rearranger rearranger;
 
     public BarDB() {
         barArray = new Bar[DEFAULT_INITIAL_SIZE];
@@ -39,40 +42,23 @@ public class BarDB {
 
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        rearrangeArray();
+        rearranger.rearrangeArraybyDiff(size, barArray);
         for (int i = 0; i < size; i++) {
-            sb.append((i + 1) + ". " + barArray[i].getName() + " (" + barArray[i].getOpeningTime() + "-" + barArray[i].getClosingTime() + ")"
-                    + " distance: " + barArray[i].getDistance() + "m" + "\n");
+            sb.append((i + 1) + ". " + barArray[i].getName() + " (" + barArray[i].getOpeningTime()
+                    + "-" + barArray[i].getClosingTime() + ")" + " distance: " + barArray[i].getDistance() + "m" + "\n");
         }
         return sb.toString();
     }
 
-    public void rearrangeArray() {
-        double[] diffArray = new double[size];
+    public String toString(LocalTime time) {
+        StringBuilder sb = new StringBuilder();
+        rearranger.rearrangeArraybyTime(time, size, barArray);
         for (int i = 0; i < size; i++) {
-            barArray[i].setDistance(Setup.findDistanceInMetresBetweenTwoCoordinates(barArray[i].getLocationNAxis(), barArray[i].getLocationEAxis()));
-            diffArray[i] = barArray[i].getDistance();
+            sb.append((i + 1) + ". " + barArray[i].getName() + " (" + barArray[i].getOpeningTime()
+                    + "-" + barArray[i].getClosingTime() + ")" + "\n");
         }
-        bubbleSort(diffArray);
-        for (int i = 0; i < size; i++) {
-            for (int j = 0; j < size; j++) {
-                if (diffArray[i] == barArray[j].getDistance()){
-                    Bar temp = barArray[i];
-                    barArray[i] = barArray[j];
-                    barArray[j] = temp;
-                }
-            }
-        }
+        return sb.toString();
     }
 
-    void bubbleSort(double[] arr) {
-        int n = arr.length;
-        for (int i = 0; i < n - 1; i++)
-            for (int j = 0; j < n - i - 1; j++)
-                if (arr[j] > arr[j + 1]) {
-                    double temp = arr[j];
-                    arr[j] = arr[j + 1];
-                    arr[j + 1] = temp;
-                }
-    }
+
 }
