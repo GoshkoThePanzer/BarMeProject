@@ -33,29 +33,50 @@ public class Rearranger {
                 }
     }
 
-    public void rearrangeArrayByTime(LocalTime time, int size, BarDB barDB) {
+    public void rearrangeArrayByTime(LocalTime time, int size, Bar[] barArray, BarDB barDB) {
         //future development - it's not ready!
-        Bar[] barArray = barDB.getBarArray();
         double[] timeArray = new double[size];
-        int lim = size;
-        for (int i = 0; i < lim; i++) {
-            if (time.isAfter(barArray[i].getClosingTime()) || time.isBefore(barArray[i].getOpeningTime())) {
+        int limit = size;
+        boolean isOpen;
+        for (int i = 0; i < limit; i++){
+            if (barArray[i].getOpeningTime().isBefore(barArray[i].getClosingTime())){
+                isOpen = checkIfOpen(barArray[i].getOpeningTime(), barArray[i].getClosingTime(), time, 1);
+            } else {
+                isOpen = checkIfOpen(barArray[i].getOpeningTime(), barArray[i].getClosingTime(), time, 2);
+            }
+            if (!isOpen) {
                 barDB.remove(barArray[i]);
-                size--;
             }
         }
-        for (int i = 0; i < size; i++) {
-            timeArray[i] = barArray[i].getClosingTime().getHour()*60 - time.getHour()*60 + barArray[i].getClosingTime().getMinute() - time.getMinute();
+        for (int i = 0; i < size; i++){
+            double timeDiff;
+            if (barArray[i].getOpeningTime().isBefore(barArray[i].getClosingTime())){
+                timeDiff = calculateTimeDiff(time, barArray[i].getClosingTime());
+            } else timeDiff = calculateTimeDiff(barArray[i].getClosingTime(), time);
+            if (timeDiff < 0) throw new IllegalArgumentException("Difference can't be negative!");
+            timeArray[i] = timeDiff;
         }
+        System.out.println(Arrays.toString(timeArray));
         bubbleSort(timeArray);
+        System.out.println(Arrays.toString(timeArray));
         for (int i = 0; i < size; i++) {
             for (int j = 0; j < size; j++) {
-                if (timeArray[i] == barArray[i].getClosingTime().getHour()*60 - time.getHour()*60 + barArray[i].getClosingTime().getMinute() - time.getMinute()) {
+                if (timeArray[i] == calculateTimeDiff(time, barArray[j].getClosingTime())) {
                     Bar temp = barArray[i];
                     barArray[i] = barArray[j];
                     barArray[j] = temp;
                 }
             }
         }
+
+    }
+    public boolean checkIfOpen (LocalTime timeMin, LocalTime timeMax, LocalTime time, int flag){
+        if (flag == 1) return time.isAfter(timeMin) && time.isBefore(timeMax);
+        else return time.isAfter(timeMin) || time.isBefore(timeMax);
+    }
+
+    public double calculateTimeDiff(LocalTime time, LocalTime timeMax){
+        return timeMax.getHour() * 60 - time.getHour() * 60
+                + timeMax.getMinute() - time.getMinute();
     }
 }
