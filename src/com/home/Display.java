@@ -22,12 +22,8 @@ public class Display {
 
     }
 
-    public void addPage(Page page) {
-        frame.getContentPane().removeAll();
-        for (int i = 0; i < page.getComponentsNumber(); i++) {
-            frame.getContentPane().add(page.getSpecificComponent(i));
-            frame.setVisible(true);
-        }
+    public void addTexture(TextureManager texture) {
+        frame.add(texture).setVisible(true);
 
     }
     public void changePage(Page page) {
