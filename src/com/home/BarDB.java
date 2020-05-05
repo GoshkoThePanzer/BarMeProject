@@ -33,12 +33,15 @@ public class BarDB {
     }
 
     public void remove(Bar removedBar) {
-        int i = 0;
-        while (!barArray[i].equals(removedBar)) {
-            i++;
+        int limit = size;
+        for (int i = 0; i < limit; i++){
+            if (removedBar.equals(barArray[i])){
+                for (int j = i; j < limit - 1; j++){
+                    barArray[j] = barArray[j+1];
+                }
+            }
         }
-        if (size - 1 - i >= 0) System.arraycopy(barArray, i + 1, barArray, i, size - 1 - i);
-        size = size - 1;
+        size--;
     }
 
     public String toString() {
@@ -54,7 +57,7 @@ public class BarDB {
 
     public String toString(LocalTime time) {
         StringBuilder sb = new StringBuilder();
-        rearranger.rearrangeArrayByTime(time, size, this);
+        rearranger.rearrangeArrayByTime(time, size, barArray, this);
         for (int i = 0; i < size; i++) {
             sb.append(i + 1).append(". ").append(barArray[i].getName()).append(" (").append(barArray[i].getOpeningTime())
                     .append("-").append(barArray[i].getClosingTime()).append(")").append("\n");
