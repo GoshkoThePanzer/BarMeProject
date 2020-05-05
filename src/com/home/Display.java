@@ -14,7 +14,7 @@ public class Display {
         height = heightSize;
 
         frame.setSize(widthSize, heightSize);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setTitle(name);
         frame.setResizable(false);

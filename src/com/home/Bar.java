@@ -25,6 +25,13 @@ public class Bar {
         return distance;
     }
 
+    public int getMapX() {
+        return (int) Math.abs(((locationNAxis - Map.MAP_START_X_CONST) * 600) / Map.MAP_CONST);
+    }
+    public int getMapY() {
+        return (int) Math.abs(((locationEAxis - Map.MAP_START_Y_CONST) * 600) / Map.MAP_CONST);
+    }
+
     public void setDistance(double distance) {
         this.distance = distance;
     }

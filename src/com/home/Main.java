@@ -8,12 +8,21 @@ public class Main {
     public static void main(String[] args) {
         // write your code here
         Scanner input = new Scanner(System.in);
-        int option = input.nextInt();
-        switch (option){
-            case 1: option1();break;
-            case 2: option2();break;
-            case 3: option3();break;
-            default:break;
+        while (true) {
+            int option = input.nextInt();
+            switch (option) {
+                case 1:
+                    option1();
+                    break;
+                case 2:
+                    option2();
+                    break;
+                case 3:
+                    option3();
+                    break;
+                default:
+                    break;
+            }
         }
     }
 
@@ -32,5 +41,8 @@ public class Main {
 
     public static void option3() {
         Map map = new Map();
+        while (true) {
+            map.update();
+        }
     }
 }

@@ -9,6 +9,8 @@ public class InputManager extends JPanel implements ChangeListener {
 
     private boolean pressed = false;
     private boolean isMouseRealised = false;
+    private int mouseReleasedX = 0;
+    private int mouseReleasedY = 0;
 
     InputManager() {
         JButton button = new JButton("");
@@ -32,10 +34,24 @@ public class InputManager extends JPanel implements ChangeListener {
     public void listener() {
         int x = (int) MouseInfo.getPointerInfo().getLocation().getX() - Map.display.getFrame().getLocation().x - 8;
         int y = (int) MouseInfo.getPointerInfo().getLocation().getY() - Map.display.getFrame().getLocation().y - 30;
-        int xIndex = x / ((Display.getWidth()) / 8);
-        int yIndex = y / ((Display.getHeight()) / 8);
 
-        if (pressed)
-        else if (isMouseRealised)
+        if (pressed) mousePressed(x, y);
+        else if (isMouseRealised) mouseRealised(x, y);
+    }
+
+    private void mousePressed(int x, int y) {
+
+        if(mouseReleasedX == 0 && mouseReleasedY == 0) {
+            mouseReleasedX = x;
+            mouseReleasedY = y;
+        }
+
+        System.out.println("x: " + x + " y: " + y);
+    }
+
+    private void mouseRealised(int x, int y) {
+        mouseReleasedX = x;
+        mouseReleasedY = y;
+        isMouseRealised = false;
     }
 }
