@@ -4,20 +4,29 @@ import java.time.LocalTime;
 
 public class Bar {
     private String name;
-    private float locationNAxis;
-    private float locationEAxis;
+    private double locationNAxis;
+    private double locationEAxis;
     private LocalTime openingTime;
     private LocalTime closingTime;
+    private double distance;
 
     public Bar() {
     }
 
-    public Bar(String name, float locationNAxis, float locationEAxis, LocalTime openingTime, LocalTime closingTime) {
+    public Bar(String name, double locationNAxis, double locationEAxis, LocalTime openingTime, LocalTime closingTime) {
         this.name = name;
         this.locationNAxis = locationNAxis;
         this.locationEAxis = locationEAxis;
         this.openingTime = openingTime;
         this.closingTime = closingTime;
+    }
+
+    public double getDistance() {
+        return distance;
+    }
+
+    public void setDistance(double distance) {
+        this.distance = distance;
     }
 
     public String getName() {
@@ -28,19 +37,19 @@ public class Bar {
         this.name = name;
     }
 
-    public float getLocationNAxis() {
+    public double getLocationNAxis() {
         return locationNAxis;
     }
 
-    public void setLocationNAxis(float locationNAxis) {
+    public void setLocationNAxis(double locationNAxis) {
         this.locationNAxis = locationNAxis;
     }
 
-    public float getLocationEAxis() {
+    public double getLocationEAxis() {
         return locationEAxis;
     }
 
-    public void setLocationEAxis(float locationEAxis) {
+    public void setLocationEAxis(double locationEAxis) {
         this.locationEAxis = locationEAxis;
     }
 
